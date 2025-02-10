@@ -1,0 +1,25 @@
+# this file configures the away hosts with a gitrepos framework
+- name: setup gitpushers group
+  hosts: local-away-x86
+  become: true
+  tasks:
+    - name: create group
+      ansible.builtin.group:
+        name: gitpushers
+        state: present
+    - name: add user to group
+      ansible.builtin.user:
+        name: j0hn
+        groups: gitpushers
+        append: yes
+
+- name: create gitrepos folder
+  hosts: local-away-x86
+  become: true
+  tasks:
+    - name: create folder
+      ansible.builtin.file:
+        path: /gitrepos
+        group: gitpushers
+        mode: 3770
+        state: directory
