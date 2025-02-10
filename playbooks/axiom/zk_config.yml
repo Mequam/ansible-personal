@@ -1,0 +1,32 @@
+- name: Install Note Dependencies
+  hosts: local-away-x86
+  become: true
+  tasks:
+    - name: install zk
+      ansible.builtin.package:
+        name: zk
+        state: latest
+
+- name: Copy Configruations
+  hosts: local-away-x86
+  tasks:
+    - name: Create Config Folder
+      ansible.builtin.file:
+        path: /home/j0hn/.config/zk/
+        state: directory
+    - name: Sync Zk Config
+      ansible.posix.synchronize:
+        src: /home/j0hn/.config/zk/
+        dest: /home/j0hn/.config/zk/
+
+- name: Install Notes
+  hosts: local-away-x86
+  tasks:
+    - name: Create Folder
+      ansible.builtin.file:
+        path: /home/j0hn/Documents/notes/primary_zk/
+        state: directory
+    - name: Sync Notes
+      ansible.posix.synchronize:
+        src: /home/j0hn/Documents/notes/primary_zk/
+        dest: /home/j0hn/Documents/notes/primary_zk/

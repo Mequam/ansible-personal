@@ -1,12 +1,12 @@
 - name: Install Tmux
-  hosts: away
+  hosts: all
   tasks:
-    - name: Install Tmux On Away Hosts
+    - name: install / update tmux
       ansible.builtin.package:
         name: tmux
         state: latest
 
-- name: Sync Tmux
+- name: Copy Tmux Config
   hosts: away
   tasks:
     - name: Sync Tmux

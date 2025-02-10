@@ -5,5 +5,3 @@
       ansible.posix.synchronize:
         src: /home/j0hn/.zshrc
         dest: /home/j0hn/.zshrc
-
-
