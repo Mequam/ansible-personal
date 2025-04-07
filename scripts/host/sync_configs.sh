@@ -6,7 +6,7 @@
 #this is where we send files to
 CONFIG_GIT_REPO=~/ProgramingWorkshop/bash/config/
 
-CONFIG_FILES=(~/.tmux.conf ~/.bashrc ~/.zshrc ~/.profile ~/.oh-my-zsh/themes/copper-mn.zsh-theme)
+CONFIG_FILES=(~/.tmux.conf ~/.bashrc ~/.zshrc ~/.profile ~/.oh-my-zsh/themes/copper-mn.zsh-theme ~/.config/zk/config.toml)
 CONFIG_REPOS=(~/.config/nvim ~/Documents/notes/primary_zk ~/.config/awesome/)
 GIT_REMOTE=local
 GIT_REMOTE_BRANCH=main

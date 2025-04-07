@@ -1,0 +1,66 @@
+- name: install base packages
+  hosts: all-x86
+  become: true
+  tasks:
+    - name: install rsync
+      ansible.builtin.package:
+        name: rsync
+        state: latest
+
+    - name: install neovim
+      ansible.builtin.package:
+        name: neovim
+        state: latest
+
+    - name: install luarocks
+      ansible.builtin.package:
+        name: luarocks
+        state: latest
+    
+    - name: install npm
+      ansible.builtin.package:
+        name: npm
+        state: latest
+
+- name: Install Configuration
+  hosts: away-x86
+  tasks:
+    - name: copy neovim config
+      ansible.posix.synchronize:
+        src: /home/j0hn/.config/nvim/
+        dest: /home/j0hn/.config/nvim/
+    - name: install lazy plugins
+      ansible.builtin.shell: nvim --headless "+Lazy! sync" +qa
+    - name: setup coc neovim
+      ansible.builtin.shell: npm ci
+      args:
+        chdir: /home/j0hn/.local/share/nvim/lazy/coc.nvim/
+
+- name: Install Note Dependencies
+  hosts: local-away-x86
+  become: true
+  tasks:
+    - name: install zk
+      ansible.builtin.package:
+        name: zk
+        state: latest
+
+- name: Install Notes
+  hosts: local-away-x86
+  tasks:
+    - name: Create Folder
+      ansible.builtin.file:
+        path: /home/j0hn/Documents/notes/primary_zk/
+        state: directory
+    - name: Create Folder
+      ansible.builtin.file:
+        path: /home/j0hn/.config/zk/
+        state: directory
+    - name: Sync Notes
+      ansible.posix.synchronize:
+        src: /home/j0hn/Documents/notes/primary_zk/
+        dest: /home/j0hn/Documents/notes/primary_zk/
+    - name: Sync Zk Config
+      ansible.posix.synchronize:
+        src: /home/j0hn/.config/zk/
+        dest: /home/j0hn/.config/zk/

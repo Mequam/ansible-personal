@@ -3,6 +3,15 @@ flock:
     arch-linux:
     ubuntu:
 
+all-x86:
+  hosts:
+    rockhopper:
+      ansible_host: localhost
+    chinstrap:
+      ansible_host: chinstrap
+    afericangray:
+      ansible_host: afericangray
+
 arch-linux:
   children:
     base:
@@ -23,10 +32,34 @@ arch-linux-away:
     chinstrap:
       ansible_host: chinstrap
 
+away:
+  children:
+    ubuntu:
+    arch-linux-away:
+
+# these are local networks computers that are not
+# from online
+local-away:
+  children:
+    arch-linux-away:
+
+
 ubuntu:
   hosts:
     afericangray:
       ansible_host: afericangray
+
+away-x86:
+  hosts:
+    chinstrap:
+      ansible_host: chinstrap
+    afericangray:
+      ansible_host: afericangray
+
+local-away-x86:
+  hosts:
+    chinstrap:
+      ansible_host: chinstrap
 
 arm:
   hosts:

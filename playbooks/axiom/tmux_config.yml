@@ -1,0 +1,15 @@
+- name: Install Tmux
+  hosts: away
+  tasks:
+    - name: Install Tmux On Away Hosts
+      ansible.builtin.package:
+        name: tmux
+        state: latest
+
+- name: Sync Tmux
+  hosts: away
+  tasks:
+    - name: Sync Tmux
+      ansible.posix.synchronize:
+        src: /home/j0hn/.tmux.conf
+        dest: /home/j0hn/.tmux.conf

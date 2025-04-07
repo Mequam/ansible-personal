@@ -1,0 +1,9 @@
+- name: Copy Zsh Config
+  hosts: local-away
+  tasks:
+    - name: Copy Config
+      ansible.posix.synchronize:
+        src: /home/j0hn/.zshrc
+        dest: /home/j0hn/.zshrc
+
+
