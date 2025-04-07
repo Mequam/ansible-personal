@@ -1,0 +1,34 @@
+flock:
+  children:
+    arch-linux:
+    ubuntu:
+
+arch-linux:
+  children:
+    base:
+    arch-linux-away:
+  vars:
+    gitserver: macaroni
+
+
+base:
+  hosts:
+    rockhopper:
+      ansible_host: localhost
+
+arch-linux-away:
+  hosts:
+    macaroni:
+      ansible_host: macaroni
+    chinstrap:
+      ansible_host: chinstrap
+
+ubuntu:
+  hosts:
+    afericangray:
+      ansible_host: afericangray
+
+arm:
+  hosts:
+    macaroni:
+      ansible_host: macaroni

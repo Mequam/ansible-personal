@@ -1,0 +1,9 @@
+- name: Sync Configuration Files
+  hosts: arch-linux-away
+  tasks:
+    - name: Sync Tmux
+      ansible.builtin.copy:
+        src: /home/j0hn/tmux.conf
+        dest: /home/j0hn/tmux.conf
+
+
